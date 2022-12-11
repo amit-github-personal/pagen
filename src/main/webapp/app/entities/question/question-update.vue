@@ -63,7 +63,20 @@
                 v-for="questionTypeOption in questionTypes"
                 :key="questionTypeOption.id"
               >
-                {{ questionTypeOption.id }}
+                {{ questionTypeOption.type }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="$t('pagenApp.question.standard')" for="question-standard">Standard</label>
+            <select class="form-control" id="question-standard" data-cy="standard" name="standard" v-model="question.standard">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="question.standard && standardOption.id === question.standard.id ? question.standard : standardOption"
+                v-for="standardOption in standards"
+                :key="standardOption.id"
+              >
+                {{ standardOption.name }}
               </option>
             </select>
           </div>

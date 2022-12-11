@@ -47,15 +47,22 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="$t('pagenApp.multipleChoice.option')" for="multiple-choice-option">Option</label>
-            <select class="form-control" id="multiple-choice-option" data-cy="option" name="option" v-model="multipleChoice.option">
-              <option v-bind:value="null"></option>
+            <label v-text="$t('pagenApp.multipleChoice.option')" for="multiple-choice-option">Option</label>
+            <select
+              class="form-control"
+              id="multiple-choice-options"
+              data-cy="option"
+              multiple
+              name="option"
+              v-if="multipleChoice.options !== undefined"
+              v-model="multipleChoice.options"
+            >
               <option
-                v-bind:value="multipleChoice.option && optionOption.id === multipleChoice.option.id ? multipleChoice.option : optionOption"
+                v-bind:value="getSelected(multipleChoice.options, optionOption)"
                 v-for="optionOption in options"
                 :key="optionOption.id"
               >
-                {{ optionOption.id }}
+                {{ optionOption.name }}
               </option>
             </select>
           </div>

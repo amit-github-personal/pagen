@@ -3,9 +3,9 @@ import { IQuestion } from '@/shared/model/question.model';
 export interface IStandard {
   id?: number;
   name?: string;
-  question?: IQuestion | null;
+  questions?: IQuestion[] | null;
 }
 
 export class Standard implements IStandard {
-  constructor(public id?: number, public name?: string, public question?: IQuestion | null) {}
+  constructor(public id?: number, public name?: string, public questions?: IQuestion[] | null) {}
 }

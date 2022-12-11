@@ -6,7 +6,7 @@ export interface IQuestion {
   name?: string;
   archived?: boolean | null;
   questionType?: IQuestionType | null;
-  standards?: IStandard[] | null;
+  standard?: IStandard | null;
 }
 
 export class Question implements IQuestion {
@@ -15,7 +15,7 @@ export class Question implements IQuestion {
     public name?: string,
     public archived?: boolean | null,
     public questionType?: IQuestionType | null,
-    public standards?: IStandard[] | null
+    public standard?: IStandard | null
   ) {
     this.archived = this.archived ?? false;
   }

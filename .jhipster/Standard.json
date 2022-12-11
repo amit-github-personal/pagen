@@ -21,7 +21,7 @@
       "otherEntityName": "question",
       "otherEntityRelationshipName": "standard",
       "relationshipName": "question",
-      "relationshipType": "many-to-one"
+      "relationshipType": "one-to-many"
     }
   ],
   "service": "no"

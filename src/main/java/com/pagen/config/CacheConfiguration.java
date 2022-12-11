@@ -52,6 +52,7 @@ public class CacheConfiguration {
             createCache(cm, com.pagen.domain.Question.class.getName());
             createCache(cm, com.pagen.domain.Question.class.getName() + ".standards");
             createCache(cm, com.pagen.domain.MultipleChoice.class.getName());
+            createCache(cm, com.pagen.domain.MultipleChoice.class.getName() + ".options");
             createCache(cm, com.pagen.domain.Option.class.getName());
             createCache(cm, com.pagen.domain.Option.class.getName() + ".multipleChoices");
             createCache(cm, com.pagen.domain.QuestionType.class.getName());

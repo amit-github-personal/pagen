@@ -23,7 +23,7 @@ entity Standard {
  */
 entity Question {
 	name String required
-    archived Boolean 
+    archived Boolean
 }
 
 
@@ -40,15 +40,15 @@ entity MultipleChoice {
 entity Option {
 	name String required
     archived Boolean
-    
+
 }
 
-relationship ManyToOne {
+relationship ManyToMany {
 	MultipleChoice to Option
 }
 
 /**
- * Question Type Representation. 
+ * Question Type Representation.
  * Belongs to Question.
  * @author Amit Mishra
  * @since 1.0
@@ -63,6 +63,6 @@ relationship OneToOne {
   Question to QuestionType
 }
 
-relationship ManyToOne {
+relationship OneToMany {
 	Standard to Question
 }

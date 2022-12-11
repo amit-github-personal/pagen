@@ -32,9 +32,9 @@ public class Option implements Serializable {
     @Column(name = "archived")
     private Boolean archived;
 
-    @OneToMany(mappedBy = "option")
+    @ManyToMany(mappedBy = "options")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "option" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "options" }, allowSetters = true)
     private Set<MultipleChoice> multipleChoices = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -84,10 +84,10 @@ public class Option implements Serializable {
 
     public void setMultipleChoices(Set<MultipleChoice> multipleChoices) {
         if (this.multipleChoices != null) {
-            this.multipleChoices.forEach(i -> i.setOption(null));
+            this.multipleChoices.forEach(i -> i.removeOption(this));
         }
         if (multipleChoices != null) {
-            multipleChoices.forEach(i -> i.setOption(this));
+            multipleChoices.forEach(i -> i.addOption(this));
         }
         this.multipleChoices = multipleChoices;
     }
@@ -99,13 +99,13 @@ public class Option implements Serializable {
 
     public Option addMultipleChoice(MultipleChoice multipleChoice) {
         this.multipleChoices.add(multipleChoice);
-        multipleChoice.setOption(this);
+        multipleChoice.getOptions().add(this);
         return this;
     }
 
     public Option removeMultipleChoice(MultipleChoice multipleChoice) {
         this.multipleChoices.remove(multipleChoice);
-        multipleChoice.setOption(null);
+        multipleChoice.getOptions().remove(this);
         return this;
     }
 

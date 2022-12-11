@@ -13,5 +13,11 @@
                                  constraintName="fk_question__question_type_id"
                                  referencedColumnNames="id"
                                  referencedTableName="question_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="standard_id"
+                                 baseTableName="question"
+                                 constraintName="fk_question__standard_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="standard"/>
     </changeSet>
 </databaseChangeLog>

@@ -23,7 +23,6 @@
     <include file="config/liquibase/changelog/20221211053105_added_entity_Option.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221211053205_added_entity_QuestionType.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20221211052805_added_entity_constraints_Standard.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221211052905_added_entity_constraints_Question.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221211053005_added_entity_constraints_MultipleChoice.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

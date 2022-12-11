@@ -33,7 +33,7 @@
       "otherEntityName": "standard",
       "otherEntityRelationshipName": "question",
       "relationshipName": "standard",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "no"

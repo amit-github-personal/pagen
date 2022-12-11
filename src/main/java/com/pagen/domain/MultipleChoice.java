@@ -3,6 +3,8 @@ package com.pagen.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -32,9 +34,15 @@ public class MultipleChoice implements Serializable {
     @Column(name = "archived")
     private Boolean archived;
 
-    @ManyToOne
+    @ManyToMany
+    @JoinTable(
+        name = "rel_multiple_choice__option",
+        joinColumns = @JoinColumn(name = "multiple_choice_id"),
+        inverseJoinColumns = @JoinColumn(name = "option_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "multipleChoices" }, allowSetters = true)
-    private Option option;
+    private Set<Option> options = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -77,16 +85,28 @@ public class MultipleChoice implements Serializable {
         this.archived = archived;
     }
 
-    public Option getOption() {
-        return this.option;
+    public Set<Option> getOptions() {
+        return this.options;
     }
 
-    public void setOption(Option option) {
-        this.option = option;
+    public void setOptions(Set<Option> options) {
+        this.options = options;
     }
 
-    public MultipleChoice option(Option option) {
-        this.setOption(option);
+    public MultipleChoice options(Set<Option> options) {
+        this.setOptions(options);
+        return this;
+    }
+
+    public MultipleChoice addOption(Option option) {
+        this.options.add(option);
+        option.getMultipleChoices().add(this);
+        return this;
+    }
+
+    public MultipleChoice removeOption(Option option) {
+        this.options.remove(option);
+        option.getMultipleChoices().remove(this);
         return this;
     }
 

@@ -20,11 +20,22 @@
             <column name="archived" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="option_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20221211053005-1-relations" author="jhipster">
+
+        <createTable tableName="rel_multiple_choice__option">
+            <column name="option_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="multiple_choice_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="multiple_choice_id, option_id" tableName="rel_multiple_choice__option"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

@@ -36,7 +36,7 @@ public class QuestionType implements Serializable {
     @Column(name = "archived")
     private Boolean archived;
 
-    @JsonIgnoreProperties(value = { "questionType", "standards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "questionType", "standard" }, allowSetters = true)
     @OneToOne(mappedBy = "questionType")
     private Question question;
 

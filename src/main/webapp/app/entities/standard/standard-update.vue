@@ -32,19 +32,6 @@
               </small>
             </div>
           </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('pagenApp.standard.question')" for="standard-question">Question</label>
-            <select class="form-control" id="standard-question" data-cy="question" name="question" v-model="standard.question">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="standard.question && questionOption.id === standard.question.id ? standard.question : questionOption"
-                v-for="questionOption in questions"
-                :key="questionOption.id"
-              >
-                {{ questionOption.id }}
-              </option>
-            </select>
-          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

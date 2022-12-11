@@ -51,6 +51,7 @@ export default class MultipleChoiceUpdate extends Vue {
         this.currentLanguage = this.$store.getters.currentLanguage;
       }
     );
+    this.multipleChoice.options = [];
   }
 
   public save(): void {
@@ -117,5 +118,12 @@ export default class MultipleChoiceUpdate extends Vue {
       .then(res => {
         this.options = res.data;
       });
+  }
+
+  public getSelected(selectedVals, option): any {
+    if (selectedVals) {
+      return selectedVals.find(value => option.id === value.id) ?? option;
+    }
+    return option;
   }
 }

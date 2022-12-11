@@ -30,7 +30,6 @@
           <tr>
             <th scope="row"><span v-text="$t('global.field.id')">ID</span></th>
             <th scope="row"><span v-text="$t('pagenApp.standard.name')">Name</span></th>
-            <th scope="row"><span v-text="$t('pagenApp.standard.question')">Question</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -40,13 +39,6 @@
               <router-link :to="{ name: 'StandardView', params: { standardId: standard.id } }">{{ standard.id }}</router-link>
             </td>
             <td>{{ standard.name }}</td>
-            <td>
-              <div v-if="standard.question">
-                <router-link :to="{ name: 'QuestionView', params: { questionId: standard.question.id } }">{{
-                  standard.question.id
-                }}</router-link>
-              </div>
-            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'StandardView', params: { standardId: standard.id } }" custom v-slot="{ navigate }">

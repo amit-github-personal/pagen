@@ -146,12 +146,17 @@ public class MultipleChoiceResource {
     /**
      * {@code GET  /multiple-choices} : get all the multipleChoices.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of multipleChoices in body.
      */
     @GetMapping("/multiple-choices")
-    public List<MultipleChoice> getAllMultipleChoices() {
+    public List<MultipleChoice> getAllMultipleChoices(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all MultipleChoices");
-        return multipleChoiceRepository.findAll();
+        if (eagerload) {
+            return multipleChoiceRepository.findAllWithEagerRelationships();
+        } else {
+            return multipleChoiceRepository.findAll();
+        }
     }
 
     /**
@@ -163,7 +168,7 @@ public class MultipleChoiceResource {
     @GetMapping("/multiple-choices/{id}")
     public ResponseEntity<MultipleChoice> getMultipleChoice(@PathVariable Long id) {
         log.debug("REST request to get MultipleChoice : {}", id);
-        Optional<MultipleChoice> multipleChoice = multipleChoiceRepository.findById(id);
+        Optional<MultipleChoice> multipleChoice = multipleChoiceRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(multipleChoice);
     }
 

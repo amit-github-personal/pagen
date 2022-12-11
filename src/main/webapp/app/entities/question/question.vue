@@ -32,6 +32,7 @@
             <th scope="row"><span v-text="$t('pagenApp.question.name')">Name</span></th>
             <th scope="row"><span v-text="$t('pagenApp.question.archived')">Archived</span></th>
             <th scope="row"><span v-text="$t('pagenApp.question.questionType')">Question Type</span></th>
+            <th scope="row"><span v-text="$t('pagenApp.question.standard')">Standard</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -45,7 +46,14 @@
             <td>
               <div v-if="question.questionType">
                 <router-link :to="{ name: 'QuestionTypeView', params: { questionTypeId: question.questionType.id } }">{{
-                  question.questionType.id
+                  question.questionType.type
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="question.standard">
+                <router-link :to="{ name: 'StandardView', params: { standardId: question.standard.id } }">{{
+                  question.standard.name
                 }}</router-link>
               </div>
             </td>

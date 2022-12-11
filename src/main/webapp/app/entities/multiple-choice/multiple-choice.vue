@@ -45,11 +45,12 @@
             <td>{{ multipleChoice.name }}</td>
             <td>{{ multipleChoice.archived }}</td>
             <td>
-              <div v-if="multipleChoice.option">
-                <router-link :to="{ name: 'OptionView', params: { optionId: multipleChoice.option.id } }">{{
-                  multipleChoice.option.id
+              <span v-for="(option, i) in multipleChoice.options" :key="option.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'OptionView', params: { optionId: option.id } }">{{
+                  option.name
                 }}</router-link>
-              </div>
+              </span>
             </td>
             <td class="text-right">
               <div class="btn-group">

@@ -28,6 +28,16 @@
               }}</router-link>
             </div>
           </dd>
+          <dt>
+            <span v-text="$t('pagenApp.question.standard')">Standard</span>
+          </dt>
+          <dd>
+            <div v-if="question.standard">
+              <router-link :to="{ name: 'StandardView', params: { standardId: question.standard.id } }">{{
+                question.standard.id
+              }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>

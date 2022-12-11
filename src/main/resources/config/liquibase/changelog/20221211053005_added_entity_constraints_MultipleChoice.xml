@@ -8,9 +8,15 @@
     -->
     <changeSet id="20221211053005-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="multiple_choice_id"
+                                 baseTableName="rel_multiple_choice__option"
+                                 constraintName="fk_rel_multiple_choice__option__multiple_choice_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="multiple_choice"/>
+
         <addForeignKeyConstraint baseColumnNames="option_id"
-                                 baseTableName="multiple_choice"
-                                 constraintName="fk_multiple_choice__option_id"
+                                 baseTableName="rel_multiple_choice__option"
+                                 constraintName="fk_rel_multiple_choice__option__option_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_option"/>
     </changeSet>

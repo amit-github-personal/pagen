@@ -22,11 +22,10 @@
             <span v-text="$t('pagenApp.multipleChoice.option')">Option</span>
           </dt>
           <dd>
-            <div v-if="multipleChoice.option">
-              <router-link :to="{ name: 'OptionView', params: { optionId: multipleChoice.option.id } }">{{
-                multipleChoice.option.id
-              }}</router-link>
-            </div>
+            <span v-for="(option, i) in multipleChoice.options" :key="option.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'OptionView', params: { optionId: option.id } }">{{ option.name }}</router-link>
+            </span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

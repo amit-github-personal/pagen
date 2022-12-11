@@ -2,6 +2,8 @@ package com.pagen.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -27,9 +29,10 @@ public class Standard implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "questionType", "standards" }, allowSetters = true)
-    private Question question;
+    @OneToMany(mappedBy = "standard")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "questionType", "standard" }, allowSetters = true)
+    private Set<Question> questions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -59,16 +62,34 @@ public class Standard implements Serializable {
         this.name = name;
     }
 
-    public Question getQuestion() {
-        return this.question;
+    public Set<Question> getQuestions() {
+        return this.questions;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestions(Set<Question> questions) {
+        if (this.questions != null) {
+            this.questions.forEach(i -> i.setStandard(null));
+        }
+        if (questions != null) {
+            questions.forEach(i -> i.setStandard(this));
+        }
+        this.questions = questions;
     }
 
-    public Standard question(Question question) {
-        this.setQuestion(question);
+    public Standard questions(Set<Question> questions) {
+        this.setQuestions(questions);
+        return this;
+    }
+
+    public Standard addQuestion(Question question) {
+        this.questions.add(question);
+        question.setStandard(this);
+        return this;
+    }
+
+    public Standard removeQuestion(Question question) {
+        this.questions.remove(question);
+        question.setStandard(null);
         return this;
     }
 

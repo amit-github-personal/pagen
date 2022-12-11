@@ -24,8 +24,9 @@
     {
       "otherEntityName": "multipleChoice",
       "otherEntityRelationshipName": "option",
+      "ownerSide": false,
       "relationshipName": "multipleChoice",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

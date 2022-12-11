@@ -3,8 +3,6 @@ package com.pagen.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -39,10 +37,9 @@ public class Question implements Serializable {
     @JoinColumn(unique = true)
     private QuestionType questionType;
 
-    @OneToMany(mappedBy = "question")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "question" }, allowSetters = true)
-    private Set<Standard> standards = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "questions" }, allowSetters = true)
+    private Standard standard;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -98,34 +95,16 @@ public class Question implements Serializable {
         return this;
     }
 
-    public Set<Standard> getStandards() {
-        return this.standards;
+    public Standard getStandard() {
+        return this.standard;
     }
 
-    public void setStandards(Set<Standard> standards) {
-        if (this.standards != null) {
-            this.standards.forEach(i -> i.setQuestion(null));
-        }
-        if (standards != null) {
-            standards.forEach(i -> i.setQuestion(this));
-        }
-        this.standards = standards;
+    public void setStandard(Standard standard) {
+        this.standard = standard;
     }
 
-    public Question standards(Set<Standard> standards) {
-        this.setStandards(standards);
-        return this;
-    }
-
-    public Question addStandard(Standard standard) {
-        this.standards.add(standard);
-        standard.setQuestion(this);
-        return this;
-    }
-
-    public Question removeStandard(Standard standard) {
-        this.standards.remove(standard);
-        standard.setQuestion(null);
+    public Question standard(Standard standard) {
+        this.setStandard(standard);
         return this;
     }
 
