@@ -1,0 +1,40 @@
+{
+  "applications": ["pagen"],
+  "changelogDate": "20221211052905",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "question",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Question Representation.\\n@author Amit Mishra\\n@since 1.0",
+  "jpaMetamodelFiltering": false,
+  "name": "Question",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "questionType",
+      "otherEntityRelationshipName": "question",
+      "ownerSide": true,
+      "relationshipName": "questionType",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "standard",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "standard",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

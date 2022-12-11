@@ -1,0 +1,26 @@
+{
+  "pagenApp": {
+    "multipleChoice": {
+      "home": {
+        "title": "Multiple Choices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Multiple Choice",
+        "createOrEditLabel": "Create or edit a Multiple Choice",
+        "notFound": "No Multiple Choices found"
+      },
+      "created": "A new Multiple Choice is created with identifier {{ param }}",
+      "updated": "A Multiple Choice is updated with identifier {{ param }}",
+      "deleted": "A Multiple Choice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Multiple Choice {{ id }}?"
+      },
+      "detail": {
+        "title": "Multiple Choice"
+      },
+      "id": "ID",
+      "name": "Name",
+      "archived": "Archived",
+      "option": "Option"
+    }
+  }
+}

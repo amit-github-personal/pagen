@@ -1,0 +1,68 @@
+
+application {
+  config {
+    baseName pagen
+    applicationType monolith
+    packageName com.pagen
+    authenticationType jwt
+    prodDatabaseType mysql
+    clientFramework vue
+    serverPort 9090
+  }
+  entities *
+}
+
+entity Standard {
+	name String required
+}
+
+/**
+ * Question Representation.
+ * @author Amit Mishra
+ * @since 1.0
+ */
+entity Question {
+	name String required
+    archived Boolean 
+}
+
+
+/**
+ * Multiple Choice Questions
+ * @author Amit Mishra
+ * @since 1.0
+ */
+entity MultipleChoice {
+	name String required
+    archived Boolean
+}
+
+entity Option {
+	name String required
+    archived Boolean
+    
+}
+
+relationship ManyToOne {
+	MultipleChoice to Option
+}
+
+/**
+ * Question Type Representation. 
+ * Belongs to Question.
+ * @author Amit Mishra
+ * @since 1.0
+ */
+entity QuestionType {
+    marks Integer required
+    type String required
+    archived Boolean
+}
+
+relationship OneToOne {
+  Question to QuestionType
+}
+
+relationship ManyToOne {
+	Standard to Question
+}

@@ -1,0 +1,39 @@
+{
+  "applications": ["pagen"],
+  "changelogDate": "20221211053205",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "question_type",
+  "fields": [
+    {
+      "fieldName": "marks",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Question Type Representation.\\nBelongs to Question.\\n@author Amit Mishra\\n@since 1.0",
+  "jpaMetamodelFiltering": false,
+  "name": "QuestionType",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "questionType",
+      "ownerSide": false,
+      "relationshipName": "question",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

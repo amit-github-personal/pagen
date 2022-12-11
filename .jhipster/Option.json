@@ -1,0 +1,32 @@
+{
+  "applications": ["pagen"],
+  "changelogDate": "20221211053105",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "jhi_option",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Option",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "multipleChoice",
+      "otherEntityRelationshipName": "option",
+      "relationshipName": "multipleChoice",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

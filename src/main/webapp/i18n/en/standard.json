@@ -1,0 +1,25 @@
+{
+  "pagenApp": {
+    "standard": {
+      "home": {
+        "title": "Standards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Standard",
+        "createOrEditLabel": "Create or edit a Standard",
+        "notFound": "No Standards found"
+      },
+      "created": "A new Standard is created with identifier {{ param }}",
+      "updated": "A Standard is updated with identifier {{ param }}",
+      "deleted": "A Standard is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Standard {{ id }}?"
+      },
+      "detail": {
+        "title": "Standard"
+      },
+      "id": "ID",
+      "name": "Name",
+      "question": "Question"
+    }
+  }
+}

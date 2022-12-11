@@ -1,0 +1,33 @@
+{
+  "applications": ["pagen"],
+  "changelogDate": "20221211053005",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "multiple_choice",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Multiple Choice Questions\\n@author Amit Mishra\\n@since 1.0",
+  "jpaMetamodelFiltering": false,
+  "name": "MultipleChoice",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "option",
+      "otherEntityRelationshipName": "multipleChoice",
+      "relationshipName": "option",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
