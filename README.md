@@ -1,6 +1,6 @@
 # pagen
 
-This application was generated using JHipster 7.9.3, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.9.3](https://www.jhipster.tech/documentation-archive/v7.9.3).
+A community application useful for daily academic activities. It will support question paper generation, facilitating online tests and scheduling tests..etc. 
 
 ## Project Structure
 
