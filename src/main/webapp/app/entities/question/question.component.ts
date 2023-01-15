@@ -1,9 +1,11 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
 import { IQuestion } from '@/shared/model/question.model';
+import { IExportQuestionsModel } from '../../shared/model/exportquestions.model';
 
 import QuestionService from './question.service';
 import AlertService from '@/shared/alert/alert.service';
+import VueRouter from 'vue-router';
 
 @Component({
   mixins: [Vue2Filters.mixin],
@@ -12,9 +14,11 @@ export default class Question extends Vue {
   @Inject('questionService') private questionService: () => QuestionService;
   @Inject('alertService') private alertService: () => AlertService;
 
-  private removeId: number = null;
+  private removeId: number = 0;
 
   public questions: IQuestion[] = [];
+
+  public exportQuestionsModel : IExportQuestionsModel = {};
 
   public isFetching = false;
 
@@ -72,6 +76,21 @@ export default class Question extends Vue {
       .catch(error => {
         this.alertService().showHttpError(this, error.response);
       });
+  }
+
+  public exportQuestions(event): void {
+    this.$router.push({path: '/pdfRenderer', params: {questionQuery : this.exportQuestions}})
+    console.log(JSON.stringify(this.exportQuestionsModel));
+  }
+
+  public onExportQuestionReset(event): void {
+    event.preventDefault();
+    this.exportQuestionsModel.mcq = 0;
+    this.exportQuestionsModel.threeMarks = 0;
+    this.exportQuestionsModel.twoMarks = 0;
+    this.exportQuestionsModel.fourMarks = 0;
+    this.exportQuestionsModel.fiveMarks = 0;
+
   }
 
   public closeDialog(): void {

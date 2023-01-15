@@ -1,11 +1,8 @@
 <template>
   <div class="home row">
-    <div class="col-md-3">
-      <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-      <h1 class="display-4" v-text="$t('home.title')">Welcome, Java Hipster!</h1>
-      <p class="lead" v-text="$t('home.subtitle')">This is your homepage</p>
+    <div class="col-md-12">
+      <h1 class="display-4" v-text="$t('home.title')">Welcome, Pagen</h1>
+      <p class="lead" v-text="$t('home.subtitle')">Home Page</p>
 
       <div>
         <div class="alert alert-success" v-if="authenticated">
@@ -27,6 +24,9 @@
           >
         </div>
       </div>
+    </div>
+    <div class="container my-3">
+      <p>Import Data from files</p>
     </div>
   </div>
 </template>

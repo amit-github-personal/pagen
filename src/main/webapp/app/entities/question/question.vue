@@ -7,6 +7,10 @@
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="$t('pagenApp.question.home.refreshListLabel')">Refresh List</span>
         </button>
+
+        <button class="btn btn-info mr-2" v-b-modal.export-block>
+          <span>Export</span>
+        </button>
         <router-link :to="{ name: 'QuestionCreate' }" custom v-slot="{ navigate }">
           <button
             @click="navigate"
@@ -112,6 +116,57 @@
         </button>
       </div>
     </b-modal>
+
+    <div class="export-model">
+      <b-modal id="export-block" title="Export Questions" hide-footer>
+        <b-form @submit="exportQuestions" @reset="onExportQuestionReset">
+            <b-form-group
+              id="exportquestion-mcq"
+              label="No Of Questions in MCQ"
+              label-for="mcq-questions"
+            >
+              <b-form-input
+                id="input-1"
+                v-model="exportQuestionsModel.mcq"
+                type="number"
+                placeholder="Enter no of MCQ Questions"
+                required>
+              </b-form-input>
+            </b-form-group>
+
+
+            <b-form-group id="input-group-2" label="2 Marks Questions" label-for="2marks">
+            <b-form-input
+              id="2marks"
+              v-model="exportQuestionsModel.twoMarks"
+              type="number"
+              placeholder="Enter number of 2 marks questions"
+              required ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="4 Marks Questions" label-for="4marks">
+            <b-form-input
+              id="4marks"
+              type="number"
+              v-model="exportQuestionsModel.fourMarks"
+              placeholder="Enter number of 4 marks questions"
+              required ></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="5 Marks Questions" label-for="5marks">
+            <b-form-input
+              id="5marks"
+              type="number"
+              v-model="exportQuestionsModel.fiveMarks"
+              placeholder="Enter number of 5 marks questions"
+              required ></b-form-input>
+            </b-form-group>
+
+            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+        </b-form>
+      </b-modal>
+  </div>
   </div>
 </template>
 
