@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { IQuestion } from '@/shared/model/question.model';
+import { ExportQuestionsModel } from '../../shared/model/exportquestions.model';
 
 const baseApiUrl = 'api/questions';
 
@@ -74,6 +75,19 @@ export default class QuestionService {
     return new Promise<IQuestion>((resolve, reject) => {
       axios
         .patch(`${baseApiUrl}/${entity.id}`, entity)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public retrieveRandomQuestions(entity: ExportQuestionsModel) : Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${baseApiUrl}` + '/random', entity)
         .then(res => {
           resolve(res.data);
         })

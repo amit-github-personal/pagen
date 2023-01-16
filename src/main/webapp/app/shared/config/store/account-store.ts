@@ -1,4 +1,5 @@
 import { Module } from 'vuex';
+import { ExportQuestionsModel } from '../../model/exportquestions.model';
 
 export interface AccountStateStorable {
   logon: boolean;
@@ -47,3 +48,26 @@ export const accountStore: Module<AccountStateStorable, any> = {
     },
   },
 };
+
+
+export const exportQuestionsStore: ExportQuestionsModel = {
+  twoMarks:0,
+  fourMarks:0,
+  fiveMarks:0,
+  threeMarks:0
+}
+
+export const pagenStore  = {
+  
+  state: { exportQuestionsStore },
+  getters: {
+    getExportQuestionData: state => state.exportQuestionsStore,
+  },
+  mutations: {
+    
+    setExportQuestions(state, exportQuestions) {
+      state.exportQuestionsStore = exportQuestions;
+    }
+  }
+
+}

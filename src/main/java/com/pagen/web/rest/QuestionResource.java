@@ -2,6 +2,8 @@ package com.pagen.web.rest;
 
 import com.pagen.domain.Question;
 import com.pagen.repository.QuestionRepository;
+import com.pagen.repository.QuestionTypeRepository;
+import com.pagen.service.dto.ExportQuestionsDTO;
 import com.pagen.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,9 +15,11 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -30,14 +34,16 @@ public class QuestionResource {
     private final Logger log = LoggerFactory.getLogger(QuestionResource.class);
 
     private static final String ENTITY_NAME = "question";
+    private final QuestionTypeRepository questionTypeRepository;
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final QuestionRepository questionRepository;
 
-    public QuestionResource(QuestionRepository questionRepository) {
+    public QuestionResource(QuestionRepository questionRepository, QuestionTypeRepository questionTypeRepository) {
         this.questionRepository = questionRepository;
+        this.questionTypeRepository = questionTypeRepository;
     }
 
     /**
@@ -180,5 +186,41 @@ public class QuestionResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    /**
+     * {@code DELETE  /questions/:id} : delete the "id" question.
+     *
+     * @param questionMeta contains the question needs to be returned.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)}.
+     */
+    @PostMapping("/questions/random")
+    public ResponseEntity<Object> fetchRandomQuestions(@RequestBody ExportQuestionsDTO questionMeta) {
+        log.debug("REST request to fetch random questions  : {}", questionMeta.toString());
+        List<Question> twoMarks = questionRepository.findRandomByQuestionType(
+                questionTypeRepository.findByMarks(2).orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST)),
+                questionMeta.getTwoMarks()
+        );
+
+        List<Question> threeMarks = questionRepository.findRandomByQuestionType(
+            questionTypeRepository.findByMarks(3).orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST)),
+            questionMeta.getThreeMarks()
+        );
+
+        List<Question> fourMarks = questionRepository.findRandomByQuestionType(
+            questionTypeRepository.findByMarks(4).orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST)),
+            questionMeta.getFourMarks()
+        );
+
+        List<Question> fiveMarks = questionRepository.findRandomByQuestionType(
+            questionTypeRepository.findByMarks(5).orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST)),
+            questionMeta.getFiveMarks()
+        );
+
+        twoMarks.addAll(threeMarks);
+        twoMarks.addAll(fourMarks);
+        twoMarks.addAll(fiveMarks);
+
+        return ResponseUtil.wrapOrNotFound(Optional.of(twoMarks));
     }
 }

@@ -12,7 +12,6 @@ import QuestionTypeService from './question-type/question-type.service';
 export default class Entities extends Vue {
   @Provide('userService') private userService = () => new UserService();
   @Provide('standardService') private standardService = () => new StandardService();
-  @Provide('questionService') private questionService = () => new QuestionService();
   @Provide('multipleChoiceService') private multipleChoiceService = () => new MultipleChoiceService();
   @Provide('optionService') private optionService = () => new OptionService();
   @Provide('questionTypeService') private questionTypeService = () => new QuestionTypeService();

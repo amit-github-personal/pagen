@@ -5,7 +5,6 @@ import { IExportQuestionsModel } from '../../shared/model/exportquestions.model'
 
 import QuestionService from './question.service';
 import AlertService from '@/shared/alert/alert.service';
-import VueRouter from 'vue-router';
 
 @Component({
   mixins: [Vue2Filters.mixin],
@@ -79,8 +78,9 @@ export default class Question extends Vue {
   }
 
   public exportQuestions(event): void {
-    this.$router.push({path: '/pdfRenderer', params: {questionQuery : this.exportQuestions}})
-    console.log(JSON.stringify(this.exportQuestionsModel));
+    event.preventDefault();
+    this.$store.commit("setExportQuestions", this.exportQuestionsModel)
+    this.$router.push({ path: '/pdfRenderer'}); 
   }
 
   public onExportQuestionReset(event): void {
