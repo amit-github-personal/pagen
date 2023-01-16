@@ -6,8 +6,9 @@ import { IExportQuestionsModel } from '../model/exportquestions.model';
 
 @Component
 export default class QuestionRenderer extends Vue {
-    
+
     public exportQuestionsModel : IExportQuestionsModel = {};
+    public questions: any = {};
     @Inject('questionService') private questionService: () => QuestionService;
     @Inject('alertService') private alertService: () => AlertService;
 
@@ -23,6 +24,7 @@ export default class QuestionRenderer extends Vue {
           .then(
             res => {
               console.log(JSON.stringify(res))
+              this.questions = res;
             },
             err => {
               this.alertService().showHttpError(this, err.response);

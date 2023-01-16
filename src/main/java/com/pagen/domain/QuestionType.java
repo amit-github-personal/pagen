@@ -36,9 +36,6 @@ public class QuestionType implements Serializable {
     @Column(name = "archived")
     private Boolean archived;
 
-    @JsonIgnoreProperties(value = { "questionType", "standard" }, allowSetters = true)
-    @OneToOne(mappedBy = "questionType")
-    private Question question;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -94,24 +91,6 @@ public class QuestionType implements Serializable {
         this.archived = archived;
     }
 
-    public Question getQuestion() {
-        return this.question;
-    }
-
-    public void setQuestion(Question question) {
-        if (this.question != null) {
-            this.question.setQuestionType(null);
-        }
-        if (question != null) {
-            question.setQuestionType(this);
-        }
-        this.question = question;
-    }
-
-    public QuestionType question(Question question) {
-        this.setQuestion(question);
-        return this;
-    }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -4,15 +4,15 @@ services:
   pagen-mysql:
     image: mysql:8.0.30
     volumes:
-      - ./config/mysql:/etc/mysql/conf.d
       - mysql-data:/var/lib/mysql/
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=pagen
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:3306:3306
-    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
-  volumes:
+
+volumes:
     mysql-data:

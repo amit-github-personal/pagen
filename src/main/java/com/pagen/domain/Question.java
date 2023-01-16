@@ -26,7 +26,7 @@ public class Question implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 50000)
     private String name;
 
     @Column(name = "archived")
@@ -34,7 +34,7 @@ public class Question implements Serializable {
 
     @JsonIgnoreProperties(value = { "question" }, allowSetters = true)
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private QuestionType questionType;
 
     @ManyToOne

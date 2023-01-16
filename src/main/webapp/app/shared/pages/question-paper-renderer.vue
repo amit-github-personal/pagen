@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        {{exportQuestionsModel}}
+        {{questions}}
     </div>
 </template>
 

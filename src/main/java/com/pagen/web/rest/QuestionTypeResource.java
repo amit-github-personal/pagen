@@ -155,13 +155,6 @@ public class QuestionTypeResource {
      */
     @GetMapping("/question-types")
     public List<QuestionType> getAllQuestionTypes(@RequestParam(required = false) String filter) {
-        if ("question-is-null".equals(filter)) {
-            log.debug("REST request to get all QuestionTypes where question is null");
-            return StreamSupport
-                .stream(questionTypeRepository.findAll().spliterator(), false)
-                .filter(questionType -> questionType.getQuestion() == null)
-                .collect(Collectors.toList());
-        }
         log.debug("REST request to get all QuestionTypes");
         return questionTypeRepository.findAll();
     }
