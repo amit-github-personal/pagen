@@ -12,6 +12,9 @@ export default class QuestionRenderer extends Vue {
     @Inject('questionService') private questionService: () => QuestionService;
     @Inject('alertService') private alertService: () => AlertService;
 
+    public questions: any [] ;
+    multipleChoice: any[];
+
     mounted() {
         this.exportQuestionsModel = this.$store.getters.getExportQuestionData
         this.retrieveAllQuestions();
@@ -23,8 +26,8 @@ export default class QuestionRenderer extends Vue {
           .retrieveRandomQuestions(this.exportQuestionsModel)
           .then(
             res => {
-              console.log(JSON.stringify(res))
-              this.questions = res;
+              console.log(JSON.stringify(res));
+              this.questions =res;
             },
             err => {
               this.alertService().showHttpError(this, err.response);

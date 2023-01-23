@@ -1,20 +1,25 @@
 package com.pagen.web.rest;
 
+import com.pagen.domain.MultipleChoice;
 import com.pagen.domain.Question;
+import com.pagen.repository.MultipleChoiceRepository;
 import com.pagen.repository.QuestionRepository;
 import com.pagen.repository.QuestionTypeRepository;
 import com.pagen.service.dto.ExportQuestionsDTO;
 import com.pagen.web.rest.errors.BadRequestAlertException;
+
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,14 +41,17 @@ public class QuestionResource {
     private static final String ENTITY_NAME = "question";
     private final QuestionTypeRepository questionTypeRepository;
 
+    private final MultipleChoiceRepository multipleChoiceRepository;
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final QuestionRepository questionRepository;
 
-    public QuestionResource(QuestionRepository questionRepository, QuestionTypeRepository questionTypeRepository) {
+    public QuestionResource(QuestionRepository questionRepository, QuestionTypeRepository questionTypeRepository, MultipleChoiceRepository multipleChoiceRepository) {
         this.questionRepository = questionRepository;
         this.questionTypeRepository = questionTypeRepository;
+        this.multipleChoiceRepository = multipleChoiceRepository;
     }
 
     /**
@@ -207,8 +215,10 @@ public class QuestionResource {
             questionMeta.getThreeMarks()
         );
 
+        Page<MultipleChoice> multipleChoices = multipleChoiceRepository.findAll(PageRequest.of(0, questionMeta.getMcq(), Sort.by("name").ascending()));
+
         List<Question> fourMarks = questionRepository.findRandomByQuestionType(
-            questionTypeRepository.findByMarks(4).orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST)),
+            questionTypeRepository.findByMarks(4).orElse(null),
             questionMeta.getFourMarks()
         );
 
@@ -217,10 +227,15 @@ public class QuestionResource {
             questionMeta.getFiveMarks()
         );
 
-        twoMarks.addAll(threeMarks);
-        twoMarks.addAll(fourMarks);
-        twoMarks.addAll(fiveMarks);
+        log.info(String.valueOf(multipleChoices.getContent().get(0).getOptions()));
 
-        return ResponseUtil.wrapOrNotFound(Optional.of(twoMarks));
+        List<Object> lists = new ArrayList<>();
+        lists.addAll(twoMarks);
+        lists.addAll(threeMarks);
+        lists.addAll(fourMarks);
+        lists.addAll(fiveMarks);
+        lists.addAll(multipleChoices.getContent());
+
+        return ResponseUtil.wrapOrNotFound(Optional.of(lists));
     }
 }

@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface QuestionTypeRepository extends JpaRepository<QuestionType, Long> {
 
     Optional<QuestionType> findByMarks(int marks);
+
+    Optional<QuestionType> findByType(String type);
 }

@@ -3,6 +3,9 @@ package com.pagen.repository;
 import com.pagen.domain.MultipleChoice;
 import java.util.List;
 import java.util.Optional;
+
+import com.pagen.domain.Question;
+import com.pagen.domain.QuestionType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
